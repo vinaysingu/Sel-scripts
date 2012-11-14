@@ -1,0 +1,52 @@
+
+Driving the web on session: 1350675690023
+
+POST:/session/:sessionID/url
+POST:/session/:sessionID/timeouts/implicit_wait
+POST:/session/:sessionID/element
+POST:/session/:sessionID/element/0/value
+POST:/session/:sessionID/element
+POST:/session/:sessionID/element/1/value
+POST:/session/:sessionID/element
+POST:/session/:sessionID/element/2/click
+POST:/session/:sessionID/element
+POST:/session/:sessionID/element/3/click
+POST:/session/:sessionID/element
+GET:/session/:sessionID/element/4/css/display
+POST:/session/:sessionID/element
+POST:/session/:sessionID/element/5/click
+POST:/session/:sessionID/elements
+POST:/session/:sessionID/elements
+POST:/session/:sessionID/element/6/click
+POST:/session/:sessionID/element
+GET:/session/:sessionID/element/7/css/display
+DELETE:/session/:sessionID
+
+Ending your web drivage..
+
+
+Driving the web on session: 1350675690026
+
+POST:/session/:sessionID/url
+POST:/session/:sessionID/timeouts/implicit_wait
+POST:/session/:sessionID/element
+POST:/session/:sessionID/element/0/value
+POST:/session/:sessionID/element
+POST:/session/:sessionID/element/1/value
+POST:/session/:sessionID/element
+POST:/session/:sessionID/element/2/click
+POST:/session/:sessionID/element
+POST:/session/:sessionID/element/3/click
+POST:/session/:sessionID/element
+GET:/session/:sessionID/element/4/css/display
+POST:/session/:sessionID/element
+POST:/session/:sessionID/element/5/click
+POST:/session/:sessionID/elements
+POST:/session/:sessionID/elements
+POST:/session/:sessionID/element/6/click
+POST:/session/:sessionID/element
+GET:/session/:sessionID/element/7/css/display
+DELETE:/session/:sessionID
+
+Ending your web drivage..
+
