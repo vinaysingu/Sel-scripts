@@ -61,8 +61,8 @@ var iPad5 = {
 };
 var firefox_8 = {
  browserName: 'firefox'
-  , version: '14'
-  , platform: 'Mac 10.6'
+  , version: ''
+  , platform: 'ANY'
   , tags: ["examples"]
 , name: "This is an example test in firefox"
 };
@@ -107,7 +107,7 @@ contact.createContact(browser2);
 }
 );
 */
-login.login(sldriver,firefox_8,function(browser3)
+login.login(fbdriver,firefox_8,function(browser3)
 {
 contact.createContact(browser3);
 });

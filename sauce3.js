@@ -12,32 +12,57 @@ var sldriver = webdriver.remote(
 );
 var fbdriver = webdriver.remote();
 var cbdriver = webdriver.remote();
-
+// Adding date and time to the firefox console and the log file
 fbdriver.on('status', function(info){
+fs.exists('./firefoxresults', function(exists){
+if(!exists)
+{
+	fs.mkdir('firefoxresults', function(){
+	fs.stat('./firefoxresults', function(err,stats) {
+	if(stats.isDirectory())
+	{ console.log('Directory "firefoxresults" created');
+	}
+	})
+	})
+	}
 time.getDate(function(date){
 console.log(date);
-var message = date + '\n' + info + '\n';
-fs.appendFile('firefox.txt', message, function (err) {
+fs.appendFile('./firefoxresults/firefox.txt', '\n-----Script run on firefox at: ' + date + '-----\n' + info + '\n', function (err) {
   if (err) throw err;
 });
 console.log('\x1b[36m%s\x1b[0m', info);
-})});
+})})
+});
 
 fbdriver.on('command', function(meth, path){
-fs.appendFile('firefox.txt', meth + ':' + path + '\n', function (err) {
+fs.appendFile('./firefoxresults/firefox.txt', meth + ':' + path + '\n', function (err) {
   if (err) throw err;
 });  
 console.log(' > \x1b[33m%s\x1b[0m: %s', meth, path);
 });
 cbdriver.on('status', function(info){
-fs.appendFile('chrome.txt', info + '\n', function (err) {
+fs.exists('./chromeresults', function(exists){
+if(!exists)
+{
+	fs.mkdir('chromeresults', function(){
+	fs.stat('./chromeresults', function(err,stats) {
+	if(stats.isDirectory())
+	{ console.log('Directory "chromeresults" created');
+	}
+	})
+	})
+	}
+time.getDate(function(date){
+console.log(date);
+fs.appendFile('./chromeresults/chrome.txt', '\n-----Script run on Chrome at: ' + date + '-----\n' + info + '\n', function (err) {
   if (err) throw err;
 });
- console.log('\x1b[36m%s\x1b[0m', info);
+console.log('\x1b[36m%s\x1b[0m', info);
+})})
 });
 
 cbdriver.on('command', function(meth, path){
-fs.appendFile('chrome.txt', meth + ':' + path + '\n', function (err) {
+fs.appendFile('./chromeresults/chrome.txt', meth + ':' + path + '\n', function (err) {
   if (err) throw err;
 });
  console.log(' > \x1b[33m%s\x1b[0m: %s', meth, path);
@@ -100,9 +125,9 @@ contact.createContact(browser2);
 }
 );
 */
-login.login(sldriver,safari,function(browser3)
+login.login(fbdriver,firefox,function(browser3)
 {
-contact.createContact(browser3);
+browser3.quit();
 });
 /*login.login(sldriver,iPad5, function(browser4){
 contact.createContact(browser4);
