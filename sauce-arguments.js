@@ -1,9 +1,10 @@
 var webdriver = require('wd')
   , assert = require('assert');
 var login = require('./lib/login.js');
-var contact = require('./lib/createContact.js');
+var createContact = require('./lib/createContact.js');
+var readContact = require('./lib/readContact.js');
 var fs = require('fs');
-var time = require('./lib/getDate.js');
+var time = require('./lib/utils.js');
 var sldriver = webdriver.remote(
  "ondemand.saucelabs.com"
   , 80
@@ -16,40 +17,32 @@ var browserdriver = webdriver.remote();
 exports.starttest = function(browsername, osname, version){
 
 browserdriver.on('status', function(info){
-fs.exists('./'+ browsername +'results', function(exists){
-if(!exists)
-{
-	fs.mkdir(browsername + 'results', function(){
-	fs.stat('./'+ browsername + 'results', function(err,stats) {
-	if(stats.isDirectory())
-	{ console.log('Directory "'+ browsername + 'results" created');
-	}
-	})
-	})
-	}
 time.getDate(function(date){
 console.log(date);
-fs.appendFile('./'+ browsername + 'results/' + browsername +'.txt', '\n-----Script run at: ' + date + '-----\n' + info + '\n', function (err) {
+fs.appendFile('./results.txt', '\n-----Script run at: ' + date + '-----\n' + info + '\n', function (err) {
   if (err) throw err;
 });
 console.log('\x1b[36m%s\x1b[0m', info);
-})})
-});
+})});
 
 browserdriver.on('command', function(meth, path){
-fs.appendFile('./'+ browsername + 'results/' + browsername +'.txt', meth + ':' + path + '\n', function (err) {
+fs.appendFile('./results.txt', meth + ':' + path + '\n', function (err) {
   if (err) throw err;
 });  
 console.log(' > \x1b[33m%s\x1b[0m: %s', meth, path);
 });
 
 sldriver.on('status', function(info){
-
+fs.appendFile('./lib/results.txt', meth + ':' + path + '\n', function (err) {
+  if (err) throw err;
+});
  console.log('\x1b[36m%s\x1b[0m', info);
 });
 
 sldriver.on('command', function(meth, path){
-
+fs.appendFile('./lib/results.txt', meth + ':' + path + '\n', function (err) {
+  if (err) throw err;
+});
   console.log(' > \x1b[33m%s\x1b[0m: %s', meth, path);
 });
 
@@ -62,16 +55,20 @@ if((osname === "Windows XP") ||( osname === "Windows 7") || (osname === "Ubuntu"
 {
 	caps.version = '';
 	caps.platform = 'ANY';
-	login.login(browserdriver, caps, function(browser){
-	contact.createContact(browser);
+	login.login(browserdriver, caps, function(browserdriver){
+	createContact.createContact(browserdriver,function(browserdriver){
+	readContact.readContact(browserdriver);
+	});
 	});
 }
 else if((osname === "Linux") || (osname === "Mac 10.6") || (osname === "Mac 10.8"))
 {
 	caps.version = version;
 	caps.platform = osname;
-	login.login(sldriver, caps, function(browser){
-	contact.createContact(browser);
+	login.login(sldriver, caps, function(sldriver){
+	//--createContact.createContact(sldriver,function(sldriver){
+	readContact.readContact(sldriver);
+	//--});
 	});
 }
 

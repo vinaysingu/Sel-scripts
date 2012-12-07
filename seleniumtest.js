@@ -1,5 +1,5 @@
 var test = require('./sauce-arguments.js');
-var input = require('./lib/inputData.js');
+var input = require('./lib/utils.js');
 var browsername = process.argv[2];
 var osname = process.argv[3];
 var version = 0;
