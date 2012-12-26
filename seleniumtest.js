@@ -20,7 +20,7 @@ var requestVersion = function(callback){
 var bflag = false, oflag = false;
 
 var availbrowsers = ['firefox', 'chrome', 'internet explorer', 'safari', 'ipad', 'iphone', 'android'];
-var availenvis = ['Mac 10.6', 'Mac 10.8','Linux', 'Windows XP', 'Windows 7', 'Ubuntu'];
+var availenvis = ['Mac 10.6', 'Mac 10.8','Linux', 'Windows XP', 'Windows 7', 'Ubuntu','Windows 8'];
 var verifyCombination = function(bname,osname,callback)
 {	var valid = false;
 	var combinations = ['chrome-Windows XP', 
@@ -37,6 +37,8 @@ var verifyCombination = function(bname,osname,callback)
 						'internet explorer-Windows 8',
 						'ipad-Mac 10.6',
 						'iphone-Mac 10.6',
+						'ipad-Mac 10.8',
+						'ipad-Mac 10.8',
 						'android-Linux'];
 	var ccombination = bname + '-' + osname;
 	for(var i=0;i<combinations.length;i++)
@@ -84,7 +86,7 @@ for(var i=0; i<availbrowsers.length; i++)
 				if(availenvis[j] == osname)
 				{
 					oflag = true; //---flag for valid osname
-					if((osname == "Mac 10.6") || (osname == "Mac 10.8") || (osname == "Linux"))
+					if((osname == "Mac 10.6") || (osname == "Mac 10.8") || (osname == "Linux") || (osname == "Windows 8"))
 					{	
 						console.log('Please enter the browser version:');
 						input.input(function(version){
