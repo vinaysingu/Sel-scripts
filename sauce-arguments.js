@@ -15,7 +15,7 @@ var browserdriver = webdriver.remote();
 
 // Adding date and time to the firefox console and the log file
 exports.starttest = function(browsername, osname, version){
-
+try{
 browserdriver.on('status', function(info){
 time.getDate(function(date){
 console.log(date);
@@ -79,7 +79,11 @@ else if((osname === "Linux") || (osname === "Mac 10.6") || (osname === "Mac 10.8
 	//--});
 	});
 }
-
+}
+catch(e)
+{
+	console.log('Exception in starting test' + e);
+}
 }
 
 	
